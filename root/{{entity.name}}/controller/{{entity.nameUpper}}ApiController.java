@@ -4,8 +4,6 @@ import {{path}}.base.api.reqest.SearchRequest;
 import {{path}}.base.api.response.OkResponse;
 import {{path}}.base.api.response.SearchResponse;
 import {{path}}.{{entity.name}}.api.request.{{entity.nameUpper}}Request;
-import {{path}}.{{entity.name}}.api.request.Update{{entity.nameUpper}}Request;
-import {{path}}.{{entity.name}}.api.response.{{entity.nameUpper}}Response;
 import {{path}}.{{entity.name}}.api.response.{{entity.nameUpper}}Response;
 import {{path}}.{{entity.name}}.exception.{{entity.nameUpper}}ExistException;
 import {{path}}.{{entity.name}}.exception.{{entity.nameUpper}}NotExistException;
@@ -74,18 +72,18 @@ public class {{entity.nameUpper}}ApiController {
            @ApiResponse(code = 200, message = "Success"),
            @ApiResponse(code = 400, message = "{{entity.nameUpper}} ID invalid")
    })
-    public OkResponse<{{entity.nameUpper}}Response> update{{entity.nameUpper}}(
+    public OkResponse<{{entity.nameUpper}}Response> {{entity.name}}(
             @ApiParam(value = "{{entity.nameUpper}} id") @PathVariable String id,
-            @RequestBody Update{{entity.nameUpper}}Request update{{entity.nameUpper}}Request
-   ) throws UserNotExistException {
-        return OkResponse.of(UserMapping.getInstance().getResponse().convert(
-                {{entity.name}}ApiService.update(updateUserRequest)
+            @RequestBody {{entity.nameUpper}}Request {{entity.name}}Request
+   ) throws {{entity.nameUpper}}NotExistException {
+        return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert(
+                {{entity.name}}ApiService.update({{entity.nameUpper}}Request)
         ));
 
    }
 
 
-   @DeleteMapping(UserApiRoutes.BY_ID)
+   @DeleteMapping({{entity.nameUpper}}ApiRoutes.BY_ID)
    @ApiOperation(value = "Delete {{entity.name}}", notes = "User this when you need delete {{entity.name}}")
    @ApiResponses(value = {
            @ApiResponse(code = 200, message = "Success")

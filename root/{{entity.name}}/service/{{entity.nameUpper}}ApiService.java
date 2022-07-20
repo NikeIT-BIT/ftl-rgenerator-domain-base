@@ -53,7 +53,7 @@ public class {{entity.nameUpper}}ApiService {
         return  SearchResponse.of({{entity.name}}Docs, count);
     }
 
-    public {{entity.nameUpper}}Doc update(Update{{entity.nameUpper}}Request request) throws {{entity.nameUpper}}NotExistException {
+    public {{entity.nameUpper}}Doc update({{entity.nameUpper}}Request request) throws {{entity.nameUpper}}NotExistException {
         Optional<{{entity.nameUpper}}Doc> {{entity.name}}DocOptional = {{entity.name}}Repository.findById(request.getId());
         if ({{entity.name}}DocOptional.isEmpty()) throw new {{entity.nameUpper}}NotExistException();
         {{entity.nameUpper}}Doc {{entity.name}}Doc = {{entity.nameUpper}}Mapping.getInstance().getRequest().convert(request);

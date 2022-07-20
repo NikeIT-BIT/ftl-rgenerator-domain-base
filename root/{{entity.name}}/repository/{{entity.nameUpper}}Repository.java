@@ -1,6 +1,5 @@
 package {{path}}.{{entity.name}}.repository;
 
-import {{path}}.{{entity.name}}.controller.{{entity.nameUpper}}ApiController;
 import {{path}}.{{entity.name}}.model.{{entity.nameUpper}}Doc;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;

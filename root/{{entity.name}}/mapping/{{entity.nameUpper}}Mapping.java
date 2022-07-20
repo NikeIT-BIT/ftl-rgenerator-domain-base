@@ -12,20 +12,20 @@ import java.util.stream.Collectors;
 @Getter
 
 public class {{entity.nameUpper}}Mapping {
-    public static class RequestMapping extends BaseMapping<Update{{entity.nameUpper}}Request, {{entity.nameUpper}}Doc> {
+    public static class RequestMapping extends BaseMapping<{{entity.nameUpper}}Request, {{entity.nameUpper}}Doc> {
 
         @Override
-        public {{entity.nameUpper}}Doc convert(Update{{entity.nameUpper}}Request update{{entity.nameUpper}}Request) {
+        public {{entity.nameUpper}}Doc convert({{entity.nameUpper}}Request {{entity.name}}Request) {
             return {{entity.nameUpper}}Doc.builder()
                 {{#entityProperties}}
-                    .{{name}}({{entity.name}}Request.get{{nameUpper}})
+                    .{{name}}({{entity.name}}Request.get{{nameUpper}}())
                 {{/entityProperties}}
                     .build();
         }
 
 
         @Override
-        public Update{{entity.nameUpper}}Request unMapping({{entity.nameUpper}}Doc {{entity.name}}Doc) {
+        public {{entity.nameUpper}}Request unMapping({{entity.nameUpper}}Doc {{entity.name}}Doc) {
             throw new RuntimeException("dont use this");
         }
     }
@@ -36,7 +36,7 @@ public class {{entity.nameUpper}}Mapping {
         public {{entity.nameUpper}}Response convert({{entity.nameUpper}}Doc {{entity.name}}Doc) {
             return {{entity.nameUpper}}Response.builder()
                 {{#entityProperties}}
-                    .{{name}}({{entity.name}}Doc.get{{nameUpper}})
+                    .{{name}}({{entity.name}}Doc.get{{nameUpper}}())
                 {{/entityProperties}}
                     .build();
         }
