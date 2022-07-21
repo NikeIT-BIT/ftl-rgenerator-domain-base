@@ -24,16 +24,6 @@ public class {{entity.nameUpper}}ApiController {
     private final {{entity.nameUpper}}ApiService {{entity.name}}ApiService;
 
 
-    @PostMapping({{entity.nameUpper}}ApiRoutes.ROOT)
-    @ApiOperation(value = "create", notes = "{{entity.nameUpper}} this when you need create and new create {{entity.name}}")
-    @ApiResponses( value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 400, message = "{{entity.nameUpper}} alreade exist")
-    })
-    public OkResponse<{{entity.nameUpper}}Response> registration(@RequestBody {{entity.nameUpper}}Request request) throws {{entity.nameUpper}}ExistException {
-        return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert({{entity.name}}ApiService.create(request)));
-    }
-
 
     @GetMapping({{entity.nameUpper}}ApiRoutes.BY_ID)
     @ApiOperation(value = "Find {{entity.name}} by id", notes = "{{entity.nameUpper}} this when you need full info about")
@@ -41,14 +31,25 @@ public class {{entity.nameUpper}}ApiController {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 404, message = "{{entity.nameUpper}} not found")
     })
-   public OkResponse<{{entity.nameUpper}}Response> byId(
-            @ApiParam(value = "{{entity.nameUpper}} id") @PathVariable ObjectId id
-    ) throws ChangeSetPersister.NotFoundException {
-        return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert(
-                {{entity.name}}ApiService.findById(id).orElseThrow(
-                        ChangeSetPersister.NotFoundException::new)
-        ));
-   }
+    public OkResponse<{{entity.nameUpper}}Response> byId(
+    @ApiParam(value = "{{entity.nameUpper}} id") @PathVariable ObjectId id
+            ) throws ChangeSetPersister.NotFoundException {
+            return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert(
+            {{entity.name}}ApiService.findById(id).orElseThrow(
+            ChangeSetPersister.NotFoundException::new)
+            ));
+            }
+
+
+    @PostMapping({{entity.nameUpper}}ApiRoutes.ROOT)
+    @ApiOperation(value = "create", notes = "{{entity.nameUpper}} this when you need create and new create {{entity.name}}")
+    @ApiResponses( value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "{{entity.nameUpper}} alreade exist")
+    })
+    public OkResponse<{{entity.nameUpper}}Response> create(@RequestBody {{entity.nameUpper}}Request request) throws {{entity.nameUpper}}ExistException {
+        return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert({{entity.name}}ApiService.create(request)));
+    }
 
 
    @GetMapping({{entity.nameUpper}}ApiRoutes.ROOT)
@@ -77,7 +78,7 @@ public class {{entity.nameUpper}}ApiController {
             @RequestBody {{entity.nameUpper}}Request {{entity.name}}Request
    ) throws {{entity.nameUpper}}NotExistException {
         return OkResponse.of({{entity.nameUpper}}Mapping.getInstance().getResponse().convert(
-                {{entity.name}}ApiService.update({{entity.nameUpper}}Request)
+                {{entity.name}}ApiService.update({{entity.name}}Request)
         ));
 
    }

@@ -26,14 +26,16 @@ public class {{entity.nameUpper}}ApiService {
     private final {{entity.nameUpper}}Repository {{entity.name}}Repository;
     private final MongoTemplate mongoTemplate;
 
+    public Optional<{{entity.nameUpper}}Doc> findById(ObjectId id){
+            return {{entity.name}}Repository.findById(id);
+    }
+
     public {{entity.nameUpper}}Doc create({{entity.nameUpper}}Request request) throws {{entity.nameUpper}}ExistException {
         {{entity.nameUpper}}Doc {{entity.name}}Doc = {{entity.nameUpper}}Mapping.getInstance().getRequest().convert(request);
+        {{entity.name}}Repository.save({{entity.name}}Doc);
         return {{entity.name}}Doc;
     }
 
-    public Optional<{{entity.nameUpper}}Doc> findById(ObjectId id){
-        return {{entity.name}}Repository.findById(id);
-    }
     public SearchResponse<{{entity.nameUpper}}Doc> search(SearchRequest request){
         Criteria criteria = new Criteria();
         if(request.getQuery()!= null && !Objects.equals(request.getQuery(), "")){
