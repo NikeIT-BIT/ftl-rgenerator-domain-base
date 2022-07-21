@@ -23,21 +23,27 @@ import java.util.Optional;
 @RequiredArgsConstructor
 
 public class {{entity.nameUpper}}ApiService {
+//<---------------------------------FINAL------------------------------------------------->
     private final {{entity.nameUpper}}Repository {{entity.name}}Repository;
     private final MongoTemplate mongoTemplate;
 
+//<---------------------------------ПОИСК ПО ID------------------------------------------------->
     public Optional<{{entity.nameUpper}}Doc> findById(ObjectId id){
             return {{entity.name}}Repository.findById(id);
     }
 
+//<---------------------------------СОЗДАНАНИЕ------------------------------------------------->
     public {{entity.nameUpper}}Doc create({{entity.nameUpper}}Request request) throws {{entity.nameUpper}}ExistException {
         {{entity.nameUpper}}Doc {{entity.name}}Doc = {{entity.nameUpper}}Mapping.getInstance().getRequest().convert(request);
         {{entity.name}}Repository.save({{entity.name}}Doc);
         return {{entity.name}}Doc;
     }
 
+//<---------------------------------СПИСОК БАЗЫ ДАННЫХ------------------------------------------------->
     public SearchResponse<{{entity.nameUpper}}Doc> search(SearchRequest request){
+
         Criteria criteria = new Criteria();
+
         if(request.getQuery()!= null && !Objects.equals(request.getQuery(), "")){
             criteria = criteria.orOperator(
 //                    TODO: Add criteria
@@ -55,6 +61,7 @@ public class {{entity.nameUpper}}ApiService {
         return  SearchResponse.of({{entity.name}}Docs, count);
     }
 
+//<---------------------------------ОБНОВЛЕНИЕ------------------------------------------------->
     public {{entity.nameUpper}}Doc update({{entity.nameUpper}}Request request) throws {{entity.nameUpper}}NotExistException {
         Optional<{{entity.nameUpper}}Doc> {{entity.name}}DocOptional = {{entity.name}}Repository.findById(request.getId());
         if ({{entity.name}}DocOptional.isEmpty()) throw new {{entity.nameUpper}}NotExistException();
@@ -63,6 +70,8 @@ public class {{entity.nameUpper}}ApiService {
         {{entity.name}}Repository.save({{entity.name}}Doc);
         return {{entity.name}}Doc;
     }
+
+//<---------------------------------УДАЛЕНИЕ------------------------------------------------->
     public void delete(ObjectId id){
         {{entity.name}}Repository.deleteById(id);
     }

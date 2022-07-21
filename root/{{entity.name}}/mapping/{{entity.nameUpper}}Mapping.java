@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 
 public class {{entity.nameUpper}}Mapping {
+
     public static class RequestMapping extends BaseMapping<{{entity.nameUpper}}Request, {{entity.nameUpper}}Doc> {
 
         @Override
@@ -30,6 +31,7 @@ public class {{entity.nameUpper}}Mapping {
         }
     }
 
+
     public static class ResponseMapping extends BaseMapping<{{entity.nameUpper}}Doc, {{entity.nameUpper}}Response> {
 
         @Override
@@ -41,12 +43,12 @@ public class {{entity.nameUpper}}Mapping {
                     .build();
         }
 
-
         @Override
         public {{entity.nameUpper}}Doc unMapping({{entity.nameUpper}}Response {{entity.name}}Response) {
             throw new RuntimeException("dont use this");
         }
     }
+
 
     public static class SearchMapping extends BaseMapping<SearchResponse<{{entity.nameUpper}}Doc>, SearchResponse<{{entity.nameUpper}}Response>>{
         private final ResponseMapping responseMapping = new ResponseMapping();
@@ -64,6 +66,7 @@ public class {{entity.nameUpper}}Mapping {
             throw new RuntimeException("dont use this");
         }
     }
+
 
     private final RequestMapping request = new RequestMapping();
     private final ResponseMapping response = new ResponseMapping();
